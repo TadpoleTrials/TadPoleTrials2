@@ -847,6 +847,73 @@ header a:hover {
 .sound-toggle:hover{ opacity:0.95; }
 .sound-toggle:active{ transform: translateY(1px); }
 
+/* =========================
+   Mobile portrait layout polish
+   - Controls move BELOW the game canvas
+   - Mute button moves BELOW canvas (separate bar) to avoid accidental taps
+   ========================= */
+
+/* Only show the bar during gameplay */
+.game-container.game-active .mobile-hud-bar{
+  display:flex;
+}
+
+.mobile-hud-bar{
+  display:none;
+  width: 100%;
+  max-width: 800px;
+  margin: 10px auto 0;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 0 6px;
+  box-sizing: border-box;
+}
+
+/* Portrait phones: place on-screen controls underneath the canvas */
+@media (max-width: 768px) and (orientation: portrait){
+  /* Sound button becomes part of the bar (no absolute positioning) */
+  .sound-toggle{
+    position: static !important;
+    bottom: auto !important;
+    right: auto !important;
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+    opacity: 0.9;
+  }
+
+  /* Controls sit below the canvas */
+  #mobileControls{
+    position: static !important;
+    width: 100% !important;
+    margin: 10px auto 0 !important;
+    padding: 10px 8px 8px !important;
+    pointer-events: auto !important;
+    box-sizing: border-box;
+    gap: 14px;
+  }
+
+  /* Keep buttons in natural flow (no absolute shoot button) */
+  .shoot-btn{
+    position: static !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin-right: 0 !important;
+    align-self: auto !important;
+  }
+  .jump-btn{
+    margin-right: 0 !important;
+    align-self: auto !important;
+  }
+
+  .right-controls{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -929,9 +996,7 @@ header a:hover {
   
   <p class="level-indicator" style="display:none;"></p>
 <div class="game-container">
-    <button id="soundToggle" class="sound-toggle" aria-label="Toggle sound" title="Sound on/off">🔊</button>
-
-    <div id="startScreen" class="screen">
+<div id="startScreen" class="screen">
       <canvas id="startCanvas"></canvas>
       
       <div id="characterSelection">
@@ -977,6 +1042,10 @@ header a:hover {
 
     <!-- Game Canvas & Overlay -->
     <canvas id="gameCanvas" width="800" height="400"></canvas>
+
+    <div id="mobileHudBar" class="mobile-hud-bar">
+      <button id="soundToggle" class="sound-toggle" aria-label="Toggle sound" title="Sound on/off">🔊</button>
+    </div>
     <div id="deathOverlay" class="death-overlay">
       <div class="death-message">Oh no! Press R to respawn</div>
     </div>
