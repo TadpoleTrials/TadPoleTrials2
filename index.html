@@ -952,6 +952,30 @@ header a:hover {
     }
 
   </style>
+
+<style>
+/* =========================
+   Mobile sound button fix
+   Moves mute button away from controls
+   ========================= */
+@media (max-width: 768px) {
+  .game-container.game-active .sound-toggle{
+    position: fixed !important;
+    top: 12px;
+    right: 12px;
+    bottom: auto !important;
+    left: auto !important;
+
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+
+    z-index: 9999;
+    opacity: 0.9;
+  }
+}
+</style>
+
 </head>
 <body>
 <!-- Responsive Game Banner + Footer Branding -->
